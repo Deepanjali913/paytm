@@ -8,7 +8,7 @@ import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
 
 export default function Signup() {
-    const [userName , setUsername] = useState("");
+    const [username , setUsername] = useState("");
     const [firstName , setFirstname] = useState("");
     const [lastName , setLastname] = useState("");
     const [password , setPassword] = useState("");
@@ -35,11 +35,15 @@ export default function Signup() {
                 <Button
                 onClick={async()=>{
                     const response = await axios.post("http://localhost:3000/api/v1/user/signup",{
-                        userName ,
+                        username ,
                         firstName,
                         lastName,
                         password
-                    })
+                    }, {
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                      })
                     localStorage.setItem("token",response.data.token)
                     navigate('/dashboard')
                 }} 
